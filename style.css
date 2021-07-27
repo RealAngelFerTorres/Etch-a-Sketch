@@ -1,5 +1,7 @@
 .gridContainer {
     display: grid;
+    justify-content: center;
+    align-content: center;
     height: 480px;
     width: 480px;
     border: 2px solid;
