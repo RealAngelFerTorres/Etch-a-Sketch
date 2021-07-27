@@ -1,11 +1,16 @@
-.gridContainer{
+.gridContainer {
     display: grid;
-    grid-template-columns: repeat(16, 25px);
-    grid-template-rows: repeat(16, 25px);
-    
+    height: 480px;
+    width: 480px;
+    border: 2px solid;
+    grid-template-columns: repeat(16, 30px);
+    grid-template-rows: repeat(16, 30px);
 }
 
-div{
-    border: black 1px solid;
-    
+.cellDefault {
+    background-color: white;
+}
+
+.cellHovered {
+    background-color: black;
 }
