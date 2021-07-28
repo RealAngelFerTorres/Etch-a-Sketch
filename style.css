@@ -9,10 +9,92 @@
     grid-template-rows: repeat(16, 30px);
 }
 
-.cellDefault {
+.cell{
+    transition: all 0.3s;
+}
+
+.whiteCell {
     background-color: white;
 }
 
-.cellHovered {
+.blackCell {
     background-color: black;
+}
+
+.modernCell0 {
+    background-color:black;
+    opacity: 10%;
+}
+
+.modernCell1 {
+    background-color:black;
+    opacity: 20%;
+}
+
+.modernCell2 {
+    background-color:black;
+    opacity: 30%;
+}
+
+.modernCell3 {
+    background-color:black;
+    opacity: 40%;
+}
+
+.modernCell4 {
+    background-color:black;
+    opacity: 50%;
+}
+
+.modernCell5 {
+    background-color:black;
+    opacity: 60%;
+}
+
+.modernCell6 {
+    background-color:black;
+    opacity: 70%;
+}
+
+.modernCell7 {
+    background-color:black;
+    opacity: 80%;
+}
+
+.modernCell8 {
+    background-color:black;
+    opacity: 90%;
+}
+
+.modernCell9 {
+    background-color:black;
+    opacity: 100%;
+}
+
+.rainbowCell0 {
+    background-color: red;
+}
+
+.rainbowCell1 {
+    background-color: orange;
+}
+
+.rainbowCell2 {
+    background-color: yellow;
+}
+
+.rainbowCell3 {
+    background-color: green;
+}
+
+.rainbowCell4 {
+    background-color: blue;
+}
+
+.rainbowCell5 {
+    background-color: indigo;
+}
+
+.rainbowCell6 {
+    background-color: violet;
 }

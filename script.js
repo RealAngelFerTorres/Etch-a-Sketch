@@ -14,18 +14,60 @@ for (let cell of cells) {
     cell.addEventListener("mousemove", mouseHover)
 }
 
-// If mouse hover a blank cell, add new class with black style
-function mouseHover(e) {
-    e.target.classList.add("cellHovered");
-    e.preventDefault();
-}
+// Starts with classic (blackCell) mode by default
+let mode = 'blackCell'
 
-// Prepare reset button for a click to reset the grid
+// Prepare buttons with listeners to change mode/reset
 resetButton = document.getElementById("resetButton");
 resetButton = resetButton.addEventListener("click", resetGrid);
 
+classicButton = document.getElementById("classicButton");
+classicButton = classicButton.addEventListener("click", () => mode = 'blackCell');
+
+eraserButton = document.getElementById("eraserButton");
+eraserButton = eraserButton.addEventListener("click", () => mode = 'whiteCell');
+
+modernButton = document.getElementById("modernButton");
+modernButton = modernButton.addEventListener("click", () => mode = 'modernCell');
+
+rainbowButton = document.getElementById("rainbowButton");
+rainbowButton = rainbowButton.addEventListener("click", () => mode = 'rainbowCell');
+
+// If mouse hovers a cell, add new class depending the selected mode
+function mouseHover(e) {
+    e.preventDefault();
+    oldMode = e.target.classList[2];
+    if (!oldMode) {
+        if (mode == 'rainbowCell') {
+            e.target.classList.add(`rainbowCell${Math.floor(Math.random() * 7)}`);
+        } else if (mode == 'modernCell') {
+            e.target.classList.add("modernCell0");
+        } else {
+            e.target.classList.add(mode);
+        }
+    } else {
+        let oldModeChecker = oldMode.replace(/[0-9]/g, '');
+        if (mode != oldModeChecker) {
+            if (mode == 'rainbowCell') {
+                e.target.classList.replace(oldMode, `rainbowCell${Math.floor(Math.random() * 7)}`);
+            } else if (mode == 'modernCell') {
+                e.target.classList.replace(oldMode, "modernCell0");
+            }else {
+                e.target.classList.replace(oldMode, mode);
+            }
+        // DOING: modern mode
+        } else if (mode == 'modernCell') {
+            console.log(oldMode);
+            let number = parseInt(oldMode[10]);
+            console.log("Despues de parsear:", oldMode);
+            number += 1;
+            e.target.classList.replace(oldMode, `modernCell${number}`);
+        }
+    }
+}
+
 // Reset the grid
-function resetGrid(){
+function resetGrid() {
 
     // User inputs new grid size between 1-100
     do {
@@ -48,7 +90,7 @@ function resetGrid(){
     gridContainer.style.cssText = `grid-template-columns: repeat(${userInput}, ${480 / userInput}px);
                                    grid-template-rows: repeat(${userInput}, ${480 / userInput}px)`;
     
-    // Adds event listeners when the mouse hovers a cell. Again...
+    // Adds event listeners when the mouse hovers a cell
     let cells = document.getElementsByClassName("cell");
     for (let cell of cells) {
         cell.addEventListener("mousemove", mouseHover)
