@@ -1,14 +1,13 @@
 /* 
 TO DO:
-- True eraser
-- Modern mode must change cell color when outside the grid and back to the same cell
-- Borders must reset the actual hovered cell
+1) Borders must reset the actual hovered cell (now, any cell change changes it)
+2) GUI
 */
 
 // Creates default 16x16 blank cells grid
 let gridContainer = document.getElementsByClassName("gridContainer")[0];
 
-for (let i = 0; i < 256; i++) {
+for (let i = 0; i < 257; i++) {
     let div = document.createElement('div');
     div.classList.add(i);
     div.classList.add("cell");
@@ -21,12 +20,6 @@ for (let cell of cells) {
     cell.addEventListener("mousemove", mouseHover)
 }
 
-//  TO DO: Grid border will reset the actual hovered cell
-border = document.getElementsByClassName("gridContainer");
-
-// TO DO
-// border = border.addEventListener("mousemove", resetActualCell);
-
 // Starts with classic (blackCell) mode by default
 let mode = 'blackCell'
 
@@ -36,6 +29,11 @@ let rainbowSequence = 0;
 // Global variable for actual hovered cell
 let actualCell = "";
 
+// 1)
+// Grid border will reset the actual hovered cell
+gridBorder = document.getElementById("gridBorder");
+gridBorder = gridBorder.addEventListener("mouseover", () => actualCell = "");
+
 // Prepare buttons with listeners to change mode/reset
 resetButton = document.getElementById("resetButton");
 resetButton = resetButton.addEventListener("click", resetGrid);
@@ -44,7 +42,7 @@ classicButton = document.getElementById("classicButton");
 classicButton = classicButton.addEventListener("click", () => mode = 'blackCell');
 
 eraserButton = document.getElementById("eraserButton");
-eraserButton = eraserButton.addEventListener("click", () => mode = 'whiteCell');
+eraserButton = eraserButton.addEventListener("click", () => mode = 'eraser');
 
 modernButton = document.getElementById("modernButton");
 modernButton = modernButton.addEventListener("click", () => mode = 'modernCell');
@@ -57,36 +55,40 @@ function mouseHover(e) {
     e.preventDefault();
     let cellClases = e.target.classList;
     if (cellClases[0] != actualCell) {
-        let currentClass = cellClases[2];
-        if (!currentClass) {
-            if (mode == 'rainbowCell') {
-                cellClases.add(`rainbowCell${rainbowSequence}`);
-                rainbowSequence++;
-            } else if (mode == 'modernCell') {
-                cellClases.add("modernCell0");
-            } else {
-                cellClases.add(mode);
-            }
+        if (mode == 'eraser') {
+            cellClases.remove(cellClases[2]);
         } else {
-            if (mode == 'rainbowCell') {
-                cellClases.replace(currentClass, `rainbowCell${rainbowSequence}`);
-                rainbowSequence++;
-            } else { 
-                
-                // Takes out numbers from cell's class. ie: modernCell3
-                let currentClassChecker = currentClass.replace(/[0-9]/g, '');
-
-                if (mode != currentClassChecker) {
-                    if (mode == 'modernCell') {
-                        cellClases.replace(currentClass, "modernCell0");
-                    } else {
-                        cellClases.replace(currentClass, mode);
-                    }
+            let currentClass = cellClases[2];
+            if (!currentClass) {
+                if (mode == 'rainbowCell') {
+                    cellClases.add(`rainbowCell${rainbowSequence}`);
+                    rainbowSequence++;
                 } else if (mode == 'modernCell') {
-                    let number = parseInt(currentClass[10]);
-                    if (number < 9) {
-                        number += 1;
-                        cellClases.replace(currentClass, `modernCell${number}`);
+                    cellClases.add("modernCell0");
+                } else {
+                    cellClases.add(mode);
+                }
+            } else {
+                if (mode == 'rainbowCell') {
+                    cellClases.replace(currentClass, `rainbowCell${rainbowSequence}`);
+                    rainbowSequence++;
+                } else { 
+                    
+                    // Takes out numbers from cell's class. ie: modernCell3
+                    let currentClassChecker = currentClass.replace(/[0-9]/g, '');
+
+                    if (mode != currentClassChecker) {
+                        if (mode == 'modernCell') {
+                            cellClases.replace(currentClass, "modernCell0");
+                        } else {
+                            cellClases.replace(currentClass, mode);
+                        }
+                    } else if (mode == 'modernCell') {
+                        let number = parseInt(currentClass[10]);
+                        if (number < 9) {
+                            number += 1;
+                            cellClases.replace(currentClass, `modernCell${number}`);
+                        }
                     }
                 }
             }

@@ -4,17 +4,19 @@
     align-content: center;
     height: 480px;
     width: 480px;
-    border: 2px solid;
     grid-template-columns: repeat(16, 30px);
     grid-template-rows: repeat(16, 30px);
 }
 
-.cell{
-    transition: all 0.3s;
+/* TO DO: Improve or change this */
+#gridBorder {
+    border: 2px solid black;
+    height: 479px;
+    width: 479px;
 }
 
-.whiteCell {
-    background-color: white;
+.cell {
+    transition: all 0.3s;
 }
 
 .blackCell {
