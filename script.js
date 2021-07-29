@@ -1,5 +1,22 @@
+/* 
+TO DO:
+- Rainbow must change every time you hover a cell
+- Modern mode must change cell color when outside the grid and back to the same cell
+- Watch out line 19
+- Maybe had to try re-code with the new actualCell variable...
+*/
+
+
+
 // Creates default 16x16 blank cells grid
 let gridContainer = document.getElementsByClassName("gridContainer")[0];
+
+// Global variable for actual hovered cell
+let actualCell = "";
+
+// Grid border will reset the actual hovered cell
+border = document.getElementsByClassName("gridContainer");
+//border = border.addEventListener("mousemove", resetActualCell);
 
 for (let i = 0; i < 256; i++) {
     let div = document.createElement('div');
@@ -36,7 +53,7 @@ rainbowButton = rainbowButton.addEventListener("click", () => mode = 'rainbowCel
 // If mouse hovers a cell, add new class depending the selected mode
 function mouseHover(e) {
     e.preventDefault();
-    oldMode = e.target.classList[2];
+    let oldMode = e.target.classList[2];
     if (!oldMode) {
         if (mode == 'rainbowCell') {
             e.target.classList.add(`rainbowCell${Math.floor(Math.random() * 7)}`);
@@ -55,15 +72,19 @@ function mouseHover(e) {
             }else {
                 e.target.classList.replace(oldMode, mode);
             }
-        // DOING: modern mode
         } else if (mode == 'modernCell') {
-            console.log(oldMode);
-            let number = parseInt(oldMode[10]);
-            console.log("Despues de parsear:", oldMode);
-            number += 1;
-            e.target.classList.replace(oldMode, `modernCell${number}`);
+            if (e.target.classList[0] != actualCell) {
+                if (oldMode[10] == e.target.classList[2][10]) {
+                    let number = parseInt(oldMode[10]);
+                    if (number < 9) {
+                        number += 1;
+                        e.target.classList.replace(oldMode, `modernCell${number}`);
+                    }
+                }
+            }
         }
     }
+    actualCell = e.target.classList[0];
 }
 
 // Reset the grid
@@ -72,7 +93,6 @@ function resetGrid() {
     // User inputs new grid size between 1-100
     do {
         userInput = prompt("How many cells do you want? (Between 1 to 100)");
-        console.log(userInput);
     } while (userInput <= 0 || userInput > 100 || !(userInput == Math.floor(userInput)));
     
     // Removes all children of the container 
