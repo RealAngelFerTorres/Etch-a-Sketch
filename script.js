@@ -1,22 +1,12 @@
 /* 
 TO DO:
-- Rainbow must change every time you hover a cell
+- True eraser
 - Modern mode must change cell color when outside the grid and back to the same cell
-- Watch out line 19
-- Maybe had to try re-code with the new actualCell variable...
+- Borders must reset the actual hovered cell
 */
-
-
 
 // Creates default 16x16 blank cells grid
 let gridContainer = document.getElementsByClassName("gridContainer")[0];
-
-// Global variable for actual hovered cell
-let actualCell = "";
-
-// Grid border will reset the actual hovered cell
-border = document.getElementsByClassName("gridContainer");
-//border = border.addEventListener("mousemove", resetActualCell);
 
 for (let i = 0; i < 256; i++) {
     let div = document.createElement('div');
@@ -31,8 +21,20 @@ for (let cell of cells) {
     cell.addEventListener("mousemove", mouseHover)
 }
 
+//  TO DO: Grid border will reset the actual hovered cell
+border = document.getElementsByClassName("gridContainer");
+
+// TO DO
+// border = border.addEventListener("mousemove", resetActualCell);
+
 // Starts with classic (blackCell) mode by default
 let mode = 'blackCell'
+
+// Rainbow mode: default start in 0 (red)
+let rainbowSequence = 0;
+
+// Global variable for actual hovered cell
+let actualCell = "";
 
 // Prepare buttons with listeners to change mode/reset
 resetButton = document.getElementById("resetButton");
@@ -53,38 +55,47 @@ rainbowButton = rainbowButton.addEventListener("click", () => mode = 'rainbowCel
 // If mouse hovers a cell, add new class depending the selected mode
 function mouseHover(e) {
     e.preventDefault();
-    let oldMode = e.target.classList[2];
-    if (!oldMode) {
-        if (mode == 'rainbowCell') {
-            e.target.classList.add(`rainbowCell${Math.floor(Math.random() * 7)}`);
-        } else if (mode == 'modernCell') {
-            e.target.classList.add("modernCell0");
-        } else {
-            e.target.classList.add(mode);
-        }
-    } else {
-        let oldModeChecker = oldMode.replace(/[0-9]/g, '');
-        if (mode != oldModeChecker) {
+    let cellClases = e.target.classList;
+    if (cellClases[0] != actualCell) {
+        let currentClass = cellClases[2];
+        if (!currentClass) {
             if (mode == 'rainbowCell') {
-                e.target.classList.replace(oldMode, `rainbowCell${Math.floor(Math.random() * 7)}`);
+                cellClases.add(`rainbowCell${rainbowSequence}`);
+                rainbowSequence++;
             } else if (mode == 'modernCell') {
-                e.target.classList.replace(oldMode, "modernCell0");
-            }else {
-                e.target.classList.replace(oldMode, mode);
+                cellClases.add("modernCell0");
+            } else {
+                cellClases.add(mode);
             }
-        } else if (mode == 'modernCell') {
-            if (e.target.classList[0] != actualCell) {
-                if (oldMode[10] == e.target.classList[2][10]) {
-                    let number = parseInt(oldMode[10]);
+        } else {
+            if (mode == 'rainbowCell') {
+                cellClases.replace(currentClass, `rainbowCell${rainbowSequence}`);
+                rainbowSequence++;
+            } else { 
+                
+                // Takes out numbers from cell's class. ie: modernCell3
+                let currentClassChecker = currentClass.replace(/[0-9]/g, '');
+
+                if (mode != currentClassChecker) {
+                    if (mode == 'modernCell') {
+                        cellClases.replace(currentClass, "modernCell0");
+                    } else {
+                        cellClases.replace(currentClass, mode);
+                    }
+                } else if (mode == 'modernCell') {
+                    let number = parseInt(currentClass[10]);
                     if (number < 9) {
                         number += 1;
-                        e.target.classList.replace(oldMode, `modernCell${number}`);
+                        cellClases.replace(currentClass, `modernCell${number}`);
                     }
                 }
             }
         }
     }
-    actualCell = e.target.classList[0];
+    if (rainbowSequence >= 7){
+        rainbowSequence = 0;
+    }
+    actualCell = cellClases[0];
 }
 
 // Reset the grid
