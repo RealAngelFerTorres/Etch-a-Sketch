@@ -1,19 +1,71 @@
-.gridContainer {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    height: 480px;
-    width: 480px;
-    grid-template-columns: repeat(16, 30px);
-    grid-template-rows: repeat(16, 30px);
+body {
+    margin: 0;
+    padding: 20px;
+    background: rgb(10,184,239);
+    background: linear-gradient(0deg, rgba(10,184,239,1) 50%, rgba(219,208,57,1) 50%); 
+}
+
+@font-face {
+    font-family: 'ohio_playerregular';
+    src: url('OhioPlayer-xeO/ohioplayer-xeo-webfont.woff2') format('woff2'),
+         url('OhioPlayer-xeO/ohioplayer-xeo-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.title {
+    font-family: 'ohio_playerregular';
+    color: #b41123;
+    text-align: center;
+    padding: 20px;
+    font-size: 80px;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #gridBorder {
-    border: 1px solid black;
-    height: 500px;
-    width: 500px;
+
 }
 
+.gridContainer {
+    display: grid;
+    border-radius: 20px 20px 0px 0px;
+    grid-template-columns: repeat(16, 30px);
+    grid-template-rows: repeat(16, 30px);
+    border: solid #b41123;
+    border-width: 70px 70px 30px 70px;
+    background: rgb(214,222,227);
+    background: linear-gradient(90deg, rgba(214,222,227,1) 0%, rgba(150,140,144,1) 100%); 
+}
+
+.buttons {
+    background-color: #b41123;
+    border-radius: 0 0 20px 20px;
+    width: 620px;
+    padding-bottom: 20px;
+}
+
+button {
+    text-decoration: none;
+    border: none;
+    padding: 10px 10px;
+    font-size: 12px;
+    background-color:#f7f7f7;
+    color: rgb(102, 102, 102);
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s all;
+}
+button:active {
+    background-color:#f7f7f7dc;
+    transform: scale(0.90);
+}
 .cell {
     transition: all 0.3s;
 }
@@ -98,4 +150,8 @@
 
 .rainbowCell6 {
     background-color: violet;
+}
+
+footer {
+    text-align: center;
 }
