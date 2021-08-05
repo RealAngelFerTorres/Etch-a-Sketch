@@ -1,6 +1,6 @@
 /* 
 TO DO:
-1) CSS GUI
+1) White knob
 */
 
 // Creates default 16x16 blank cells grid

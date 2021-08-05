@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 20px;
     background: rgb(10,184,239);
-    background: linear-gradient(0deg, rgba(10,184,239,1) 50%, rgba(219,208,57,1) 50%); 
+    background: linear-gradient(0deg, rgba(10, 186, 239, 0.85) 50%, rgba(219,208,57,0.85) 50%); 
+    text-align: center;
 }
 
 @font-face {
@@ -15,14 +16,13 @@ body {
 
 .title {
     font-family: 'ohio_playerregular';
-    color: #b41123;
+    color: #b41124d7;
     text-align: center;
     padding: 20px;
     font-size: 80px;
 }
 
 main {
-    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,15 +48,23 @@ main {
     border-radius: 0 0 20px 20px;
     width: 620px;
     padding-bottom: 20px;
+    flex-direction: row;
 }
 
+.whiteKnob {
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+}
 button {
     text-decoration: none;
     border: none;
     padding: 10px 10px;
     font-size: 12px;
-    background-color:#f7f7f7;
-    color: rgb(102, 102, 102);
+    background: rgb(150,140,144);
+    background: radial-gradient(circle, rgba(150,140,144,0.7833333162366509) 0%, rgba(214,222,227,0.38837533304337357) 100%);  
     border-radius: 5px;
     cursor: pointer;
     outline: none;
@@ -153,5 +161,26 @@ button:active {
 }
 
 footer {
-    text-align: center;
+    
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: whitesmoke;
+    padding-top: 20px;
+}
+
+h5 {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+img {
+    max-width: 70%;
+    height: auto;
+}
+a:link, a:hover, a:visited, a:active {
+    color: white;
+    padding-left: 5px;
 }
