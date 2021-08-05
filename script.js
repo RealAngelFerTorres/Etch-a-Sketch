@@ -1,7 +1,6 @@
 /* 
 TO DO:
-1) Borders must reset the actual hovered cell (now, any cell change changes it)
-2) GUI
+1) CSS GUI
 */
 
 // Creates default 16x16 blank cells grid
@@ -20,19 +19,14 @@ for (let cell of cells) {
     cell.addEventListener("mousemove", mouseHover)
 }
 
-// Starts with classic (blackCell) mode by default
+// Default values
 let mode = 'blackCell'
-
-// Rainbow mode: default start in 0 (red)
 let rainbowSequence = 0;
-
-// Global variable for actual hovered cell
 let actualCell = "";
 
-// 1)
 // Grid border will reset the actual hovered cell
 gridBorder = document.getElementById("gridBorder");
-gridBorder = gridBorder.addEventListener("mouseover", () => actualCell = "");
+gridBorder = gridBorder.addEventListener("mousemove", () => actualCell = "outsideGrid");
 
 // Prepare buttons with listeners to change mode/reset
 resetButton = document.getElementById("resetButton");
@@ -52,7 +46,9 @@ rainbowButton = rainbowButton.addEventListener("click", () => mode = 'rainbowCel
 
 // If mouse hovers a cell, add new class depending the selected mode
 function mouseHover(e) {
+    e.stopPropagation();
     e.preventDefault();
+    console.log(actualCell);
     let cellClases = e.target.classList;
     if (cellClases[0] != actualCell) {
         if (mode == 'eraser') {
@@ -93,11 +89,11 @@ function mouseHover(e) {
                 }
             }
         }
+        actualCell = cellClases[0];
     }
     if (rainbowSequence >= 7){
         rainbowSequence = 0;
     }
-    actualCell = cellClases[0];
 }
 
 // Reset the grid

@@ -8,11 +8,10 @@
     grid-template-rows: repeat(16, 30px);
 }
 
-/* TO DO: Improve or change this */
 #gridBorder {
-    border: 2px solid black;
-    height: 479px;
-    width: 479px;
+    border: 1px solid black;
+    height: 500px;
+    width: 500px;
 }
 
 .cell {
