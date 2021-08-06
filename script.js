@@ -1,8 +1,3 @@
-/* 
-TO DO:
-1) White knob
-*/
-
 // Creates default 16x16 blank cells grid
 let gridContainer = document.getElementsByClassName("gridContainer")[0];
 
@@ -116,8 +111,8 @@ function resetGrid() {
     }
     
     // The cell auto-sizes according user input
-    gridContainer.style.cssText = `grid-template-columns: repeat(${userInput}, ${480 / userInput}px);
-                                   grid-template-rows: repeat(${userInput}, ${480 / userInput}px)`;
+    gridContainer.style.cssText = `grid-template-columns: repeat(${userInput}, ${560 / userInput}px);
+                                   grid-template-rows: repeat(${userInput}, ${560 / userInput}px)`;
     
     // Adds event listeners when the mouse hovers a cell
     let cells = document.getElementsByClassName("cell");

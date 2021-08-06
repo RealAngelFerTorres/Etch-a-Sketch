@@ -1,8 +1,10 @@
 body {
     margin: 0;
     padding: 20px;
+    height:max-content;
     background: rgb(10,184,239);
     background: linear-gradient(0deg, rgba(10, 186, 239, 0.85) 50%, rgba(219,208,57,0.85) 50%); 
+    background-attachment: fixed;
     text-align: center;
 }
 
@@ -35,43 +37,49 @@ main {
 .gridContainer {
     display: grid;
     border-radius: 20px 20px 0px 0px;
-    grid-template-columns: repeat(16, 30px);
-    grid-template-rows: repeat(16, 30px);
+    grid-template-columns: repeat(16, 35px);
+    grid-template-rows: repeat(16, 35px);
     border: solid #b41123;
     border-width: 70px 70px 30px 70px;
     background: rgb(214,222,227);
-    background: linear-gradient(90deg, rgba(214,222,227,1) 0%, rgba(150,140,144,1) 100%); 
+    background: linear-gradient(90deg, rgba(214,222,227,1) 0%, rgba(150,150,150,1) 100%); 
 }
 
 .buttons {
     background-color: #b41123;
     border-radius: 0 0 20px 20px;
-    width: 620px;
+    width: 700px;
     padding-bottom: 20px;
-    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .whiteKnob {
-    height: 25px;
-    width: 25px;
-    background-color: white;
-    border-radius: 50%;
     display: inline-block;
+    height: 60px;
+    width: 60px;
+    background: rgb(218,218,218);
+    background: radial-gradient(circle, rgba(218,218,218,1) 0%, rgba(255,255,255,1) 23%); 
+    box-shadow: 5px 5px 5px black;
+    border-radius: 50%;
 }
 button {
     text-decoration: none;
     border: none;
-    padding: 10px 10px;
-    font-size: 12px;
-    background: rgb(150,140,144);
-    background: radial-gradient(circle, rgba(150,140,144,0.7833333162366509) 0%, rgba(214,222,227,0.38837533304337357) 100%);  
+    padding: 10px 13px;
+    font-size: 16px;
+    color: black;
+    box-shadow: 2px 2px 5px black;
     border-radius: 5px;
     cursor: pointer;
     outline: none;
+    margin-left: 3px;
     transition: 0.2s all;
 }
 button:active {
-    background-color:#f7f7f7dc;
+    background-color:#b3b3b3;
+    box-shadow: 0px 0px 0px black;
     transform: scale(0.90);
 }
 .cell {
